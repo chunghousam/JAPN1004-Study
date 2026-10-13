@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="澳門大學 JAPN1004 Elementary Japanese I 第1–4課期中溫習：生字、文法、課文重點、模擬練習，附日語發音。">
+<title>JAPN1004 第1–4課 期中溫習</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3efe4;
+    --card: #fffdf8;
+    --ink: #1c2430;
+    --muted: #5c6570;
+    --line: #e3d9c6;
+    --teal: #0c5f59;
+    --teal-soft: #e5f3f1;
+    --seal: #9d341f;
+    --gold: #8a6230;
+    --ok: #1d7a45;
+    --ok-bg: #e7f6ee;
+    --bad: #a32626;
+    --bad-bg: #fdecec;
+    --shadow: 0 10px 30px rgba(60, 42, 20, 0.06);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background:
+      radial-gradient(1200px 500px at 10% -10%, #efe4cf 0%, transparent 55%),
+      var(--paper);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Noto Sans JP", sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  .jp, .kana, .kanji, .ex, input.ans, .flash-jp {
+    font-family: "Noto Sans JP", "Yu Gothic", "YuGothic", "Meiryo", "Hiragino Sans", sans-serif;
+  }
+  a { color: var(--teal); }
+  header.top {
+    padding: 28px 20px 18px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--gold);
+    margin: 0 0 6px;
+    font-weight: 700;
+  }
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.25;
+    margin: 0 0 8px;
+    font-weight: 700;
+  }
+  .lede { margin: 0; color: var(--muted); max-width: 46rem; }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .pill {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  .pill strong { color: var(--seal); font-weight: 700; }
+  nav.bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(243, 239, 228, .92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.bar .inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 8px 16px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+  }
+  nav.bar a {
+    flex: 0 0 auto;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  nav.bar a:hover { border-color: var(--teal); color: var(--teal); }
+  main { max-width: 1080px; margin: 0 auto; padding: 18px 16px 80px; }
+  section { margin: 0 0 28px; }
+  h2 {
+    font-size: 1.55rem;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+  h3 { font-size: 1.15rem; margin: 22px 0 8px; }
+  h4 { margin: 14px 0 6px; font-size: 1rem; }
+  .card, .block, .q, .flash, .dlg {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+  .block { padding: 16px 16px 8px; margin: 10px 0; }
+  .note {
+    background: var(--teal-soft);
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin: 10px 0;
+  }
+  .warn {
+    background: #fbf1e6;
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin: 10px 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 10px;
+  }
+  .vcard {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: center;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 10px 10px 10px 12px;
+  }
+  .vcard.known { opacity: .45; }
+  .vcard .word { display: flex; flex-direction: column; min-width: 0; }
+  .kanji { font-size: 1.35rem; font-weight: 700; line-height: 1.3; }
+  .kana { color: var(--teal); font-size: .95rem; }
+  .zh { color: var(--muted); font-size: .92rem; }
+  .tools { display: flex; flex-direction: column; gap: 6px; }
+  button.speak, button.know, button.btn, button.check, button.reveal {
+    font: inherit;
+    cursor: pointer;
+    border: 0;
+  }
+  button.speak {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--seal);
+    color: white;
+    display: grid;
+    place-items: center;
+  }
+  button.speak.on { outline: 3px solid #f2c7be; }
+  button.speak svg { width: 22px; height: 22px; fill: currentColor; }
+  button.know {
+    background: transparent;
+    color: var(--muted);
+    font-size: 12px;
+    padding: 0 2px 2px;
+  }
+  .exline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+  }
+  .ex { font-size: 1.08rem; }
+  .pattern {
+    font-weight: 700;
+    color: var(--teal);
+    font-size: 1.08rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 14px;
+    overflow: hidden;
+    display: block;
+  }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  table.plain { display: table; width: 100%; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  th { background: #f7f1e4; font-weight: 700; }
+  .search {
+    width: 100%;
+    font: inherit;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: white;
+    margin: 8px 0 12px;
+  }
+  .q { padding: 14px; margin: 10px 0; }
+  .q .prompt { margin: 0 0 8px; }
+  .q .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  input.ans, select.ans {
+    font: inherit;
+    font-size: 1.05rem;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #d9d0c0;
+    min-width: min(100%, 240px);
+    flex: 1 1 180px;
+    background: white;
+  }
+  button.btn, button.check, button.reveal {
+    background: var(--teal);
+    color: white;
+    border-radius: 10px;
+    padding: 10px 14px;
+    min-height: 44px;
+  }
+  button.reveal, button.ghost {
+    background: transparent;
+    color: var(--teal);
+    border: 1px solid var(--teal);
+  }
+  .feedback { margin: 8px 0 0; font-size: .95rem; }
+  .q.ok { background: var(--ok-bg); }
+  .q.bad { background: var(--bad-bg); }
+  .score {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .dlg { padding: 14px 16px; }
+  .dlg p { margin: 6px 0; }
+  .who { color: var(--gold); font-weight: 700; }
+  .flash {
+    padding: 22px 16px;
+    text-align: center;
+    min-height: 180px;
+  }
+  .flash-zh { font-size: 1.4rem; margin: 8px 0; }
+  .flash-jp { font-size: 2rem; font-weight: 700; margin: 8px 0; }
+  .hidden { display: none !important; }
+  .lesson-kicker { color: var(--gold); font-weight: 700; margin: 0; letter-spacing: .08em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 12px; }
+  footer {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+    color: var(--muted);
+    font-size: .92rem;
+  }
+  details.fold { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; margin: 10px 0; }
+  details.fold summary { cursor: pointer; font-weight: 700; }
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 999px;
+    display: none;
+    z-index: 30;
+    max-width: 90vw;
+  }
+  @media (max-width: 640px) {
+    body { font-size: 16.5px; }
+    .grid { grid-template-columns: 1fr; }
+    h1 { font-size: 1.7rem; }
+  }
+  @media print {
+    nav.bar, .tools, .noprint, .toast { display: none !important; }
+    body { background: white; }
+    .vcard, .block, .q { break-inside: avoid; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <p class="eyebrow">University of Macau · JAPN1004 · 2026/2027 Semester 1</p>
+  <h1>第1–4課　期中溫習</h1>
+  <p class="lede">Elementary Japanese I。範圍是《大家的日本語 初級Ⅰ 改訂版》第1課到第4課。每個生字旁邊的紅鈕會用瀏覽器朗讀日語（ja-JP）。</p>
+  <div class="meta">
+    <span class="pill">期中考 <strong>10月15日（星期四）</strong></span>
+    <span class="pill">名詞句・指示詞・場所・時間と動詞</span>
+    <span class="pill" id="countPill">生字載入中</span>
+  </div>
+  <div class="warn hidden" id="voiceBanner">這部裝置還沒有日語語音，按鈕仍會立刻朗讀，但口音可能不準。Windows：設定 → 時間與語言 → 語言與地區 → 新增語言 → 日本語 → 下載「語音」。iPhone：設定 → 輔助使用 → 朗讀內容 → 聲音 → 日語。裝好後重新整理。</div>
+</header>
+<nav class="bar" aria-label="頁內導覽">
+  <div class="inner">
+    <a href="#map">考什麼</a>
+    <a href="#traps">易錯</a>
+    <a href="#l1">第1課</a>
+    <a href="#l2">第2課</a>
+    <a href="#l3">第3課</a>
+    <a href="#l4">第4課</a>
+    <a href="#numbers">數字時間</a>
+    <a href="#cards">生字卡</a>
+    <a href="#quiz">模擬試題</a>
+    <a href="#top" id="stopLink">停止發音</a>
+  </div>
+</nav>
+<main id="app"></main>
+<p class="toast" id="toast" role="status"></p>
+<footer>
+  <p>依 JAPN1004 講義、生字表、數字／時間附錄，以及 Quiz 2（第1–2課）的題型整理，供 10 月 15 日期中前溫習。語音是瀏覽器的語音合成，不是課本錄音。建議用 Chrome 或 Edge，並保持網路連線，日語才讀得準。</p>
+</footer>
+<script>
+const SPEAKER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/></svg>';
+
+const LESSONS = [
+  {
+    id: "l1",
+    kicker: "Lesson 1",
+    title: "初めまして",
+    sub: "名詞句：N1 は N2 です／じゃありません",
+    lead: "自介、國籍、職業、年齡。整課幾乎都是「A 是 B」。",
+    groups: [
+      { name: "人", items: [
+        ["わたし", "私", "我"],
+        ["あなた", "", "你"],
+        ["あのひと", "あの人", "他、那個人"],
+        ["あのかた", "あの方", "「あの人」的禮貌說法"],
+        ["～さん", "", "接在別人名字後面：ミラーさん。不用在自己名字上，也不加在「先生」後面", "さん"],
+        ["～ちゃん", "", "接在小孩名字後面，代替「さん」：テレーザちゃん", "ちゃん"],
+        ["～じん", "～人", "……人，表示國籍：アメリカ人", "じん"]
+      ]},
+      { name: "職業・場所", items: [
+        ["せんせい", "先生", "老師。稱呼別人或說別人的職業。不拿來當自己的職業"],
+        ["きょうし", "教師", "教師。說自己的職業用這個：わたしは教師です"],
+        ["がくせい", "学生", "學生"],
+        ["かいしゃいん", "会社員", "公司職員"],
+        ["しゃいん", "社員", "職員。常和公司名一起用：IMCの社員"],
+        ["ぎんこういん", "銀行員", "銀行職員"],
+        ["いしゃ", "医者", "醫生"],
+        ["けんきゅうしゃ", "研究者", "研究人員"],
+        ["だいがく", "大学", "大學"],
+        ["びょういん", "病院", "醫院"]
+      ]},
+      { name: "疑問・年齡・應答", items: [
+        ["だれ", "誰", "誰"],
+        ["どなた", "", "「だれ」的禮貌說法"],
+        ["～さい", "～歳", "……歲", "さい"],
+        ["なんさい", "何歳", "幾歲"],
+        ["おいくつ", "", "「何歳」的禮貌說法。回答仍用「～歳です」"],
+        ["はい", "", "是；對"],
+        ["いいえ", "", "不；不是"]
+      ]},
+      { name: "打招呼（第1週課堂）", items: [
+        ["おはようございます", "", "早安"],
+        ["こんにちは", "", "你好（白天）。「は」讀 wa"],
+        ["こんばんは", "", "晚上好。「は」讀 wa"],
+        ["おやすみなさい", "お休みなさい", "晚安"],
+        ["さようなら", "", "再見"],
+        ["ありがとうございます", "", "謝謝"],
+        ["すみません", "", "對不起；請問；不好意思"],
+        ["おねがいします", "お願いします", "拜託；請"]
+      ]},
+      { name: "自介套句", items: [
+        ["はじめまして", "初めまして", "初次見面"],
+        ["～からきました", "～から来ました", "從……來。アメリカから来ました", "アメリカからきました"],
+        ["どうぞよろしくおねがいします", "どうぞよろしくお願いします", "請多關照"],
+        ["しつれいですが", "失礼ですが", "不好意思請問（接著問姓名、年齡）"],
+        ["おなまえは", "お名前は", "您怎麼稱呼？"],
+        ["こちらは", "", "這位是；這裡是。こちらはミラーさんです"]
+      ]},
+      { name: "國家", items: [
+        ["アメリカ", "", "美國"],
+        ["イギリス", "", "英國"],
+        ["インド", "", "印度"],
+        ["インドネシア", "", "印尼"],
+        ["かんこく", "韓国", "韓國"],
+        ["タイ", "", "泰國"],
+        ["ちゅうごく", "中国", "中國"],
+        ["ドイツ", "", "德國"],
+        ["にほん", "日本", "日本"],
+        ["ブラジル", "", "巴西"]
+      ]},
+      { name: "國籍（國家＋人）", items: [
+        ["アメリカじん", "アメリカ人", "美國人"],
+        ["イギリスじん", "イギリス人", "英國人"],
+        ["インドじん", "インド人", "印度人"],
+        ["インドネシアじん", "インドネシア人", "印尼人"],
+        ["かんこくじん", "韓国人", "韓國人"],
+        ["タイじん", "タイ人", "泰國人"],
+        ["ちゅうごくじん", "中国人", "中國人"],
+        ["ドイツじん", "ドイツ人", "德國人"],
+        ["にほんじん", "日本人", "日本人"],
+        ["ブラジルじん", "ブラジル人", "巴西人"]
+      ]},
+      { name: "課本場景（閱讀會見到）", items: [
+        ["アイエムシー", "", "IMC，虛構公司"],
+        ["パワーでんき", "パワー電気", "虛構電器公司"],
+        ["ブラジルエアー", "", "虛構航空公司"],
+        ["エーケーシー", "", "AKC，虛構研究中心"],
+        ["こうべびょういん", "神戸病院", "虛構醫院"],
+        ["さくらだいがく", "さくら大学", "虛構大學"],
+        ["ふじだいがく", "富士大学", "虛構大學"]
+      ]}
+    ],
+    blocks: [
+      { h: "文型1　N1 は N2 です", p: "「は」標出主題，讀 wa，不讀 ha。「です」表示判斷，相當於「是」。", ex: ["わたしはマイク・ミラーです。", "あの人は田中さんです。", "わたしは20歳です。", "胡さんは中国人です。"] },
+      { h: "文型2　N1 は N2 じゃありません", p: "口語用「じゃありません」。較鄭重、書寫用「ではありません」，「は」仍讀 wa。老師兩種都收。上次小測的範答是「じゃありません」。", ex: ["わたしは学生じゃありません。", "マリアさんは中国人ではありません。", "ワンさんは銀行員じゃありません。医者です。"] },
+      { h: "文型3　N1 は N2 ですか", p: "是非問句。肯定重複名詞：はい、学生です。否定：いいえ、学生じゃありません。問身份時不要回答「はい、そうです」。", ex: ["ミラーさんは学生ですか。", "はい、学生です。", "いいえ、学生じゃありません。"] },
+      { h: "疑問詞　だれ／どなた、何歳／おいくつ", p: "疑問詞問句不用「はい／いいえ」。禮貌配對：あの方はどなたですか。おいくつですか。回答年齡說「24歳です」，不說「おいくつです」。", ex: ["あの人はだれですか。", "あの方はどなたですか。", "カリナさんは何歳ですか。", "24歳です。"] },
+      { h: "文型4　も 取代 は", p: "「也」用「も」，「も」換掉「は」，不能說「はも」。前後件不同時，第二句改回「は」。否定也可以用「も」。", ex: ["胡さんは学生です。田中さんも学生です。", "グプタさんも会社員ですか。", "いいえ、グプタさんはアメリカ人じゃありません。", "李さんは学生じゃありません。田中さんも学生じゃありません。"] },
+      { h: "の：所屬", p: "「N1 の N2」表示 N2 屬於 N1。公司、學校、醫院都這樣接。", ex: ["ミラーさんはIMCの社員です。", "ワットさんはさくら大学の先生です。", "カリナさんは富士大学の学生です。", "ワンさんは神戸病院の医者です。"] }
+    ],
+    people: [
+      ["ミラー", "28歳", "アメリカ", "IMCの社員"],
+      ["グプタ", "42歳", "インド", "IMCの社員"],
+      ["サントス", "", "ブラジル", "ブラジルエアーの社員"],
+      ["シュミット", "", "ドイツ", "パワー電気の会社員"],
+      ["山田", "", "日本", "銀行員"],
+      ["ワット", "", "イギリス", "さくら大学の先生"],
+      ["タワポン", "", "タイ", "学生"],
+      ["カリナ", "24歳", "インドネシア", "富士大学の学生"],
+      ["イー", "", "韓国", "AKCの研究者"],
+      ["ワン", "", "中国", "神戸病院の医者"],
+      ["テレーザちゃん", "9歳", "", "小孩，用ちゃん"],
+      ["佐藤", "", "", "對話裡的同事，佐藤けい子"]
+    ],
+    dialogue: [
+      ["佐藤", "おはようございます。ミラーさん、こちらはマイク・ミラーさんです。"],
+      ["ミラー", "初めまして。ミラーです。アメリカから来ました。どうぞよろしく。"],
+      ["佐藤", "佐藤です。どうぞよろしく。"]
+    ],
+    dialogueNote: "自介時名字後面不加「さん」。對方才叫你「ミラーさん」。",
+    traps: [
+      "自己不說「わたしはミラーさんです」，說「ミラーです」。",
+      "自己的職業說「教師です」，不說「先生です」。老師是「ワット先生」或「ワットさんは先生です」。",
+      "「は」寫 ha、讀 wa。こんにちは、こんばんは 的「は」也讀 wa。",
+      "20歳 只讀 はたち。1歳 いっさい、8歳 はっさい、10歳 じゅっさい。"
+    ]
+  },
+  {
+    id: "l2",
+    kicker: "Lesson 2",
+    title: "これから お世話になります",
+    sub: "これ／それ／あれ、この／その／あの、所有の「の」",
+    lead: "東西在誰手邊、是誰的、是什麼種類。上次 Quiz 2 的對話填空主要考這一課。",
+    groups: [
+      { name: "指示詞", items: [
+        ["これ", "", "這。靠近說話的人，後面直接加「は」"],
+        ["それ", "", "那。靠近聽的人"],
+        ["あれ", "", "那。離說話的人和聽的人都遠"],
+        ["この～", "", "這個……後面必須接名詞：この本", "この"],
+        ["その～", "", "那個……靠近聽者：その傘", "その"],
+        ["あの～", "", "那個……遠處：あの時計", "あの"]
+      ]},
+      { name: "物品", items: [
+        ["ほん", "本", "書"],
+        ["じしょ", "辞書", "詞典"],
+        ["ざっし", "雑誌", "雜誌"],
+        ["しんぶん", "新聞", "報紙"],
+        ["ノート", "", "筆記簿"],
+        ["てちょう", "手帳", "記事本"],
+        ["めいし", "名刺", "名片"],
+        ["カード", "", "卡片"],
+        ["えんぴつ", "鉛筆", "鉛筆"],
+        ["ボールペン", "", "原子筆"],
+        ["シャープペンシル", "", "自動鉛筆"],
+        ["かぎ", "鍵", "鑰匙"],
+        ["とけい", "時計", "鐘、錶"],
+        ["かさ", "傘", "傘"],
+        ["かばん", "", "皮包、提包"],
+        ["シーディー", "", "CD"],
+        ["テレビ", "", "電視"],
+        ["ラジオ", "", "收音機"],
+        ["カメラ", "", "照相機"],
+        ["コンピューター", "", "電腦"],
+        ["くるま", "車", "汽車"],
+        ["つくえ", "机", "桌子"],
+        ["いす", "椅子", "椅子"],
+        ["チョコレート", "", "巧克力"],
+        ["コーヒー", "", "咖啡"],
+        ["おみやげ", "お土産", "伴手禮。也可以說 みやげ"]
+      ]},
+      { name: "語言・疑問", items: [
+        ["えいご", "英語", "英語"],
+        ["にほんご", "日本語", "日語"],
+        ["～ご", "～語", "……語：中国語、韓国語", "ご"],
+        ["なん", "何", "什麼"],
+        ["そう", "", "那樣；是的"]
+      ]},
+      { name: "會話・練習C", items: [
+        ["これからおせわになります", "これからお世話になります", "今後請多指教"],
+        ["こちらこそよろしくおねがいします", "こちらこそよろしくお願いします", "彼此彼此，也請多指教"],
+        ["あのう", "", "那個……開口或猶豫時用"],
+        ["えっ", "", "咦，表示意外"],
+        ["どうぞ", "", "請"],
+        ["どうもありがとうございます", "", "非常感謝"],
+        ["そうですか", "", "這樣啊"],
+        ["ちがいます", "違います", "不對；不是"],
+        ["あ", "", "啊，突然注意到時"]
+      ]}
+    ],
+    blocks: [
+      { h: "文型1　これは 辞書です", p: "これ／それ／あれ 是代名詞，可以直接當主語。問「是不是」有兩種答法：重複名詞，或用 そうです／違います。", ex: ["これは辞書です。", "それは本です。", "あれは時計です。", "これは辞書ですか。", "はい、そうです。", "いいえ、違います。鉛筆です。"] },
+      { h: "選択疑問", p: "A ですか、B ですか。不要答「はい」，直接說是哪一個。", ex: ["それはボールペンですか、シャープペンシルですか。", "ボールペンです。"] },
+      { h: "何ですか", p: "問東西是什麼。回答時指示詞會換邊：對方說「それ」，你手裡的是「これ」。", ex: ["それは何ですか。", "これはラジオです。", "あれは何ですか。", "あれは時計です。"] },
+      { h: "この／その／あの 後面一定有名詞", p: "これ 不能改成修飾語。×このは英語の本です。 ○これは英語の本です。 ○この本は英語の本です。", ex: ["この本はわたしのです。", "その辞書", "あの時計"] },
+      { h: "の：所有，以及種類", p: "所有：だれの、ミラーさんの、わたしの。種類／內容：日本語の本、コンピューターの本、何の雑誌。", ex: ["それはわたしの傘です。", "これはミラーさんのかぎですか。", "あれはだれのかばんですか。", "佐藤さんのかばんです。", "これは何の本ですか。", "コンピューターの本です。"] },
+      { h: "名詞可以省略的時候", p: "所有關係可以省掉後面的名詞：佐藤さんのです、わたしのです、だれのですか。種類的「何の」「コンピューターの」「車の」不能省，後面的名詞要留下。這是課堂投影片特別打叉的地方。", ex: ["このかばんはだれのですか。", "カリナさんのです。", "これは何の本ですか。", "コンピューターの本です。"] }
+    ],
+    dialogue: [
+      ["サントス", "こんにちは。サントスです。これからお世話になります。どうぞよろしくお願いします。"],
+      ["山田", "こちらこそよろしくお願いします。"],
+      ["サントス", "あのう、これ、コーヒーです。どうぞ。"],
+      ["山田", "どうもありがとうございます。"]
+    ],
+    dialogueNote: "電話或門口報到會說房間號：408のサントスです。408 讀 よんまるはち。",
+    traps: [
+      "東西在對方手裡用「それ」，在自己手裡用「これ」。中文都可能說「這個」。",
+      "問「これは本ですか」可以答「はい、そうです」；問「あなたは学生ですか」要答「はい、学生です」。",
+      "だれのですか ○。何のですか ×，要說 何の本ですか。コンピューターのです ×，要說 コンピューターの本です。",
+      "上次小測寫過的漢字：机、傘、銀行員、教師。假名：病院、手帳、鉛筆、雑誌。"
+    ]
+  },
+  {
+    id: "l3",
+    kicker: "Lesson 3",
+    title: "これを ください",
+    sub: "ここ／そこ／あそこ、どこ、いくら、どこの",
+    lead: "問地方、樓層、價錢、哪裡出產。禮貌說法是 こちら／そちら／あちら／どちら。",
+    groups: [
+      { name: "場所の指示詞", items: [
+        ["ここ", "", "這裡。靠近說話的人"],
+        ["そこ", "", "那裡。靠近聽的人"],
+        ["あそこ", "", "那裡。雙方都遠"],
+        ["どこ", "", "哪裡"],
+        ["こちら", "", "「ここ」的禮貌說法；也指方向"],
+        ["そちら", "", "「そこ」的禮貌說法。打電話時指對方那裡"],
+        ["あちら", "", "「あそこ」的禮貌說法"],
+        ["どちら", "", "「どこ」的禮貌說法"]
+      ]},
+      { name: "場所・物", items: [
+        ["きょうしつ", "教室", "教室"],
+        ["しょくどう", "食堂", "食堂、餐廳"],
+        ["じむしょ", "事務所", "辦事處"],
+        ["かいぎしつ", "会議室", "會議室"],
+        ["うけつけ", "受付", "接待處"],
+        ["ロビー", "", "大堂"],
+        ["へや", "部屋", "房間"],
+        ["トイレ", "", "廁所"],
+        ["おてあらい", "お手洗い", "洗手間，比トイレ委婉"],
+        ["かいだん", "階段", "樓梯"],
+        ["エレベーター", "", "電梯"],
+        ["エスカレーター", "", "電扶梯"],
+        ["じどうはんばいき", "自動販売機", "自動售賣機"],
+        ["でんわ", "電話", "電話"],
+        ["くに", "国", "國家"],
+        ["おくに", "お国", "貴國"],
+        ["かいしゃ", "会社", "公司"],
+        ["うち", "", "家"],
+        ["くつ", "靴", "鞋子"],
+        ["ネクタイ", "", "領帶"],
+        ["ワイン", "", "葡萄酒"],
+        ["うりば", "売り場", "賣場、專櫃"],
+        ["ちか", "地下", "地下"]
+      ]},
+      { name: "樓層・價錢", items: [
+        ["～かい", "～階", "……樓。注意 1、3、6、8、10 的讀音", "かい"],
+        ["なんがい", "何階", "幾樓。讀 なんがい，不讀 なんかい"],
+        ["～えん", "～円", "……日圓", "えん"],
+        ["いくら", "", "多少錢"],
+        ["ひゃく", "百", "百"],
+        ["せん", "千", "千"],
+        ["まん", "万", "萬"]
+      ]},
+      { name: "買東西時的套句", items: [
+        ["いらっしゃいませ", "", "歡迎光臨"],
+        ["みせてください", "見せてください", "請給我看。そのワインを見せてください"],
+        ["ください", "", "請給我。これをください"],
+        ["じゃ", "", "那麼"],
+        ["どうも", "", "謝謝，較短"]
+      ]},
+      { name: "相關地名", items: [
+        ["イタリア", "", "意大利"],
+        ["スイス", "", "瑞士"],
+        ["フランス", "", "法國"],
+        ["ジャカルタ", "", "雅加達"],
+        ["バンコク", "", "曼谷"],
+        ["ベルリン", "", "柏林"],
+        ["しんおおさか", "新大阪", "新大阪"]
+      ]}
+    ],
+    blocks: [
+      { h: "文型1　ここは 食堂です", p: "場所詞和 これ／それ／あれ 的距離一樣。對客人和陌生人用 こちら／そちら／あちら。", ex: ["ここは食堂です。", "そこはトイレです。", "あそこは会議室です。", "こちらは教室です。", "エレベーターはこちらです。"] },
+      { h: "文型2　N は 場所です", p: "人、東西、設施都可以放在「は」前面，後面接樓層或地點。", ex: ["エレベーターはあそこです。", "ロビーはG階です。", "お手洗いはあそこです。", "自動販売機は2階です。", "テレーザちゃんは教室です。"] },
+      { h: "どこ／どちら", p: "問地點。回答可以是 ここです、あそこです、3階です、会議室です、アメリカです。", ex: ["トイレはどこですか。", "あそこです。", "山田さんはどこですか。", "会議室です。", "お国はどちらですか。", "アメリカです。", "大学はどちらですか。", "マカオ大学です。"] },
+      { h: "どこの：哪裡出產", p: "「どこの」和「何の」不同：名詞可以省。日本のです、ナイキのです 都可以。", ex: ["これはどこのワインですか。", "日本のです。", "これはどこの車ですか。", "日本の車です。", "その靴はどこのですか。", "ナイキのです。"] },
+      { h: "いくら", p: "問價錢。回答「數字＋円です」。円 讀 えん。", ex: ["これはいくらですか。", "2500円です。", "このネクタイは1500円です。"] },
+      { h: "会話裡先出現的「を」", p: "「を」要到第6課才正式學。這一課的課文已經用到，先當成套句記。", ex: ["そのワインを見せてください。", "じゃ、これをください。", "あの鉛筆をください。"] }
+    ],
+    dialogue: [
+      ["店員", "いらっしゃいませ。"],
+      ["マリア", "すみません。ワイン売り場はどこですか。"],
+      ["店員", "地下1階です。"],
+      ["マリア", "そのワインを見せてください。これはどこのワインですか。"],
+      ["店員", "日本のです。"],
+      ["マリア", "いくらですか。"],
+      ["店員", "2500円です。"],
+      ["マリア", "じゃ、これをください。"]
+    ],
+    dialogueNote: "地下1階 讀 ちかいっかい。2500円 讀 にせんごひゃくえん。",
+    traps: [
+      "何階 讀 なんがい。3階 讀 さんがい，不讀 さんかい。1階 いっかい、6階 ろっかい、8階 はっかい、10階 じゅっかい。",
+      "300 是 さんびゃく，600 ろっぴゃく，800 はっぴゃく。3000 さんぜん，8000 はっせん。價錢題幾乎必考。",
+      "どこのですか 可以省名詞。何のですか 不可以。",
+      "はい、そうです 可以用在「ここは新大阪ですか」。問「いくら」時直接答金額。"
+    ]
+  },
+  {
+    id: "l4",
+    kicker: "Lesson 4",
+    title: "そちらは 何時までですか",
+    sub: "時間、～時に Vます、～から～まで、動詞的四種形式",
+    lead: "時刻、星期、營業時間，以及 ます／ません／ました／ませんでした。",
+    groups: [
+      { name: "動詞（先背ます形）", items: [
+        ["おきます", "起きます", "起床"],
+        ["ねます", "寝ます", "睡覺"],
+        ["はたらきます", "働きます", "工作"],
+        ["やすみます", "休みます", "休息；休假"],
+        ["べんきょうします", "勉強します", "學習"],
+        ["おわります", "終わります", "結束"]
+      ]},
+      { name: "場所", items: [
+        ["デパート", "", "百貨公司"],
+        ["ぎんこう", "銀行", "銀行"],
+        ["ゆうびんきょく", "郵便局", "郵局"],
+        ["としょかん", "図書館", "圖書館"],
+        ["びじゅつかん", "美術館", "美術館"]
+      ]},
+      { name: "時刻", items: [
+        ["いま", "今", "現在"],
+        ["～じ", "～時", "……點", "じ"],
+        ["～ふん", "～分", "……分。也有讀 ぷん 的時候", "ふん"],
+        ["はん", "半", "半。6時半 是六點半"],
+        ["なんじ", "何時", "幾點"],
+        ["なんぷん", "何分", "幾分"],
+        ["ごぜん", "午前", "上午"],
+        ["ごご", "午後", "下午"]
+      ]},
+      { name: "一天・日期", items: [
+        ["あさ", "朝", "早上"],
+        ["ひる", "昼", "白天；中午"],
+        ["ばん", "晩", "晚上"],
+        ["よる", "夜", "夜裡。晩 的另一個說法"],
+        ["おととい", "一昨日", "前天"],
+        ["きのう", "昨日", "昨天"],
+        ["きょう", "今日", "今天。這一課讀 きょう"],
+        ["あした", "明日", "明天。這一課讀 あした"],
+        ["あさって", "明後日", "後天"],
+        ["けさ", "今朝", "今天早上"],
+        ["こんばん", "今晩", "今晚"],
+        ["やすみ", "休み", "休息；假期"],
+        ["ひるやすみ", "昼休み", "午休"],
+        ["しけん", "試験", "考試"],
+        ["かいぎ", "会議", "會議"],
+        ["えいが", "映画", "電影"]
+      ]},
+      { name: "每……・星期", items: [
+        ["まいあさ", "毎朝", "每天早上"],
+        ["まいばん", "毎晩", "每天晚上"],
+        ["まいにち", "毎日", "每天"],
+        ["げつようび", "月曜日", "星期一"],
+        ["かようび", "火曜日", "星期二"],
+        ["すいようび", "水曜日", "星期三"],
+        ["もくようび", "木曜日", "星期四"],
+        ["きんようび", "金曜日", "星期五"],
+        ["どようび", "土曜日", "星期六"],
+        ["にちようび", "日曜日", "星期日"],
+        ["なんようび", "何曜日", "星期幾"]
+      ]},
+      { name: "助詞・電話", items: [
+        ["～から", "", "從……", "から"],
+        ["～まで", "", "到……", "まで"],
+        ["～と～", "", "A 和 B", "と"],
+        ["ばんごう", "番号", "號碼"],
+        ["なんばん", "何番", "幾號"],
+        ["でんわばんごう", "電話番号", "電話號碼"],
+        ["たいへんですね", "大変ですね", "真辛苦啊。「ね」用來附和"]
+      ]},
+      { name: "課文場景", items: [
+        ["ニューヨーク", "", "紐約"],
+        ["ペキン", "", "北京"],
+        ["ロサンゼルス", "", "洛杉磯"],
+        ["ロンドン", "", "倫敦"],
+        ["あすか", "", "虛構店名「あすか」"],
+        ["アップルぎんこう", "アップル銀行", "虛構銀行"],
+        ["みどりとしょかん", "みどり図書館", "虛構圖書館"],
+        ["やまとびじゅつかん", "やまと美術館", "虛構美術館"]
+      ]}
+    ],
+    blocks: [
+      { h: "文型1　今 4時5分です", p: "問現在幾點：今何時ですか。「今」前面不加「に」。4時 讀 よじ，7時 しちじ，9時 くじ。4時5分 讀 よじごふん。", ex: ["今何時ですか。", "今4時5分です。", "2時10分です。", "午前0時10分です。", "7時半です。"] },
+      { h: "星期和「と」", p: "兩個名詞用「と」連接。問休假日：休みは何曜日ですか。", ex: ["きょうは何曜日ですか。", "火曜日です。", "休みは土曜日と日曜日です。"] },
+      { h: "から／まで：營業時間", p: "名詞句用「です」，動詞句用「ます」。可以只說一邊。", ex: ["銀行は何時から何時までですか。", "9時から3時までです。", "郵便局は9時から5時までです。", "そちらは10時までです。", "大学は9時からです。"] },
+      { h: "文型2　時間 に 動詞", p: "具體時刻加「に」再接動詞。今、きょう、あした、きのう、けさ、こんばん、まいあさ、まいにち 這些詞本身不加「に」。", ex: ["わたしは毎朝6時に起きます。", "3時に勉強します。", "毎朝何時に起きますか。", "7時に起きます。", "きのう23時に寝ました。"] },
+      { h: "動詞四形：把「ます」換掉", p: "ます 兼現在習慣和將來。ました 是過去。否定是 ません、ませんでした。問句不要用 そうです 回答。", ex: ["わたしは毎日勉強します。", "わたしはあした休みます。", "わたしはきのう勉強しました。", "わたしはきのう勉強しませんでした。", "きのう勉強しましたか。", "はい、勉強しました。", "いいえ、勉強しませんでした。"] },
+      { h: "名詞句と動詞句", p: "同一件事可以有兩種說法。看句子裡是「です」還是動詞。", ex: ["図書館は月曜日と火曜日休みです。", "図書館は月曜日と火曜日休みます。", "わたしは9時から5時まで働きます。", "昼休みは12時から1時までです。"] }
+    ],
+    dialogue: [
+      ["ミラー", "すみません。「あすか」の電話番号は何番ですか。"],
+      ["佐藤", "5275の2725です。"],
+      ["ミラー", "すみません。そちらは何時までですか。"],
+      ["店員", "10時までです。"],
+      ["ミラー", "休みは何曜日ですか。"],
+      ["店員", "日曜日です。"],
+      ["ミラー", "そうですか。どうも。"]
+    ],
+    dialogueNote: "電話號碼用「の」分段。5275の2725 讀 ごにななご の にななにご。0 在號碼裡常讀 ゼロ；在「午前0時」讀 れい。",
+    traps: [
+      "6時に起きます ○。きょうに起きます ×。まいあさに ×。今に ×。",
+      "あした休みます 仍用 ます，因為是將來。きのう 才用 ました。",
+      "はい、働きます／いいえ、働きません。動詞問句不答「はい、そうです」。",
+      "4時 よじ、7時 しちじ、9時 くじ。1分 いっぷん、3分 さんぷん、6分 ろっぷん、8分 はっぷん、10分 じゅっぷん。"
+    ]
+  }
+];
+
+const CHARTS = [
+  { id: "age", title: "歲數（第1課就考）", note: "個位 1 → いっさい，個位 8 → はっさい，整十（除了20）→ じゅっさい／じっさい。20歲只有 はたち。上次小測：20歳 はたち、16歳 じゅうろくさい、38歳 さんじゅうはっさい、21歳 にじゅういっさい。", rows: [
+    ["1歳", "いっさい"], ["2歳", "にさい"], ["3歳", "さんさい"], ["4歳", "よんさい"],
+    ["5歳", "ごさい"], ["6歳", "ろくさい"], ["7歳", "ななさい"], ["8歳", "はっさい"],
+    ["9歳", "きゅうさい"], ["10歳", "じゅっさい"], ["10歳", "じっさい"], ["11歳", "じゅういっさい"],
+    ["20歳", "はたち"], ["21歳", "にじゅういっさい"], ["24歳", "にじゅうよんさい"], ["28歳", "にじゅうはっさい"],
+    ["38歳", "さんじゅうはっさい"]
+  ]},
+  { id: "hour", title: "時（第4課）", note: "4 用 よ，7 用 しち，9 用 く。午前0時 的 0 讀 れい。", rows: [
+    ["1時", "いちじ"], ["2時", "にじ"], ["3時", "さんじ"], ["4時", "よじ"],
+    ["5時", "ごじ"], ["6時", "ろくじ"], ["7時", "しちじ"], ["8時", "はちじ"],
+    ["9時", "くじ"], ["10時", "じゅうじ"], ["11時", "じゅういちじ"], ["12時", "じゅうにじ"],
+    ["4時5分", "よじごふん"], ["7時半", "しちじはん"], ["午前0時10分", "ごぜんれいじじゅっぷん"], ["何時", "なんじ"]
+  ]},
+  { id: "min", title: "分（第4課）", note: "1、6、8、10 會促音並改讀 ぷん。3、4 因為前面是 ん，改 ぷん 但不加促音。2、5、7、9 維持 ふん。半 等於 30分。", rows: [
+    ["1分", "いっぷん"], ["2分", "にふん"], ["3分", "さんぷん"], ["4分", "よんぷん"],
+    ["5分", "ごふん"], ["6分", "ろっぷん"], ["7分", "ななふん"], ["8分", "はっぷん"],
+    ["9分", "きゅうふん"], ["10分", "じゅっぷん"], ["10分", "じっぷん"], ["15分", "じゅうごふん"],
+    ["30分", "さんじゅっぷん"], ["30分", "はん"], ["何分", "なんぷん"]
+  ]},
+  { id: "floor", title: "階（第3課）", note: "何階 固定 なんがい。尾數 3 讀 がい；尾數 1、6、8、0 常有促音。", rows: [
+    ["1階", "いっかい"], ["2階", "にかい"], ["3階", "さんがい"], ["4階", "よんかい"],
+    ["5階", "ごかい"], ["6階", "ろっかい"], ["7階", "ななかい"], ["8階", "はっかい"],
+    ["9階", "きゅうかい"], ["10階", "じゅっかい"], ["11階", "じゅういっかい"], ["13階", "じゅうさんがい"],
+    ["地下1階", "ちかいっかい"], ["何階", "なんがい"]
+  ]},
+  { id: "big", title: "百・千・万", note: "小數和分數老師標了不考。0 一般讀 ゼロ 或 れい。", rows: [
+    ["0", "ゼロ"], ["0", "れい"], ["10", "じゅう"], ["100", "ひゃく"],
+    ["300", "さんびゃく"], ["600", "ろっぴゃく"], ["800", "はっぴゃく"], ["1000", "せん"],
+    ["3000", "さんぜん"], ["8000", "はっせん"], ["1500", "せんごひゃく"], ["2500", "にせんごひゃく"],
+    ["5800", "ごせんはっぴゃく"], ["10000", "いちまん"], ["13000", "いちまんさんぜん"], ["23600", "にまんさんぜんろっぴゃく"],
+    ["360", "さんびゃくろくじゅう"], ["894", "はっぴゃくきゅうじゅうよん"], ["8010", "はっせんじゅう"],
+    ["17640", "いちまんななせんろっぴゃくよんじゅう"], ["53100", "ごまんさんぜんひゃく"],
+    ["136200", "じゅうさんまんろくせんにひゃく"], ["209000", "にじゅうまんきゅうせん"],
+    ["4300000", "よんひゃくさんじゅうまん"]
+  ]}
+];
+
+const APPENDIX = [
+  ["4月", "しがつ", "四月"], ["7月", "しちがつ", "七月"], ["9月", "くがつ", "九月"], ["何月", "なんがつ", "幾月"],
+  ["1日", "ついたち", "一號"], ["2日", "ふつか", "二號"], ["3日", "みっか", "三號"], ["4日", "よっか", "四號"],
+  ["5日", "いつか", "五號"], ["6日", "むいか", "六號"], ["7日", "なのか", "七號"], ["8日", "ようか", "八號"],
+  ["9日", "ここのか", "九號"], ["10日", "とおか", "十號"], ["14日", "じゅうよっか", "十四號"],
+  ["20日", "はつか", "二十號"], ["24日", "にじゅうよっか", "二十四號"], ["何日", "なんにち", "幾號"],
+  ["先週", "せんしゅう", "上星期"], ["今週", "こんしゅう", "這個星期"], ["来週", "らいしゅう", "下星期"], ["毎週", "まいしゅう", "每星期"],
+  ["先月", "せんげつ", "上個月"], ["今月", "こんげつ", "這個月"], ["来月", "らいげつ", "下個月"], ["毎月", "まいつき", "每個月"],
+  ["去年", "きょねん", "去年"], ["今年", "ことし", "今年"], ["来年", "らいねん", "明年"], ["毎年", "まいとし", "每年"]
+];
+
+const QUIZ = [
+  { part: "A1", title: "一、寫漢字（仿 Quiz 2 第1題）", lead: "看假名，寫漢字。", items: [
+    { kind: "write", q: "きょうし", hint: "職業", answers: ["教師"], speak: "きょうし" },
+    { kind: "write", q: "つくえ", hint: "家具", answers: ["机"], speak: "つくえ" },
+    { kind: "write", q: "かさ", hint: "下雨用", answers: ["傘"], speak: "かさ" },
+    { kind: "write", q: "ぎんこういん", hint: "在銀行工作的人", answers: ["銀行員"], speak: "ぎんこういん" },
+    { kind: "write", q: "びょういん", hint: "看病的地方", answers: ["病院"], speak: "びょういん" },
+    { kind: "write", q: "としょかん", hint: "看書的地方", answers: ["図書館"], speak: "としょかん" }
+  ]},
+  { part: "A2", title: "二、寫平假名（仿 Quiz 2 第2題）", lead: "漢字、數字、年齡都寫平假名。有兩種讀音的，寫出一種即可。", items: [
+    { kind: "write", q: "病院", answers: ["びょういん"] },
+    { kind: "write", q: "手帳", answers: ["てちょう"] },
+    { kind: "write", q: "鉛筆", answers: ["えんぴつ"] },
+    { kind: "write", q: "雑誌", answers: ["ざっし"] },
+    { kind: "write", q: "50", answers: ["ごじゅう"] },
+    { kind: "write", q: "67", answers: ["ろくじゅうなな", "ろくじゅうしち"] },
+    { kind: "write", q: "20歳", answers: ["はたち"] },
+    { kind: "write", q: "38歳", answers: ["さんじゅうはっさい"] },
+    { kind: "write", q: "21歳", answers: ["にじゅういっさい"] },
+    { kind: "write", q: "8階", answers: ["はっかい"] },
+    { kind: "write", q: "4時半", answers: ["よじはん"] },
+    { kind: "write", q: "10分", answers: ["じゅっぷん", "じっぷん"] }
+  ]},
+  { part: "A3", title: "三、寫片假名（仿 Quiz 2 第3題）", lead: "英文寫成片假名。長音用 ー。", items: [
+    { kind: "write", q: "computer", answers: ["コンピューター", "コンピュータ"] },
+    { kind: "write", q: "chocolate", answers: ["チョコレート"] },
+    { kind: "write", q: "radio", answers: ["ラジオ"] },
+    { kind: "write", q: "coffee", answers: ["コーヒー"] },
+    { kind: "write", q: "camera", answers: ["カメラ"] },
+    { kind: "write", q: "elevator", answers: ["エレベーター", "エレベータ"] }
+  ]},
+  { part: "A4", title: "四、短答（仿 Quiz 2 聽力，這裡改成書面）", lead: "用完整句子回答。正式考試會聽老師問；下面是同一類問題。", items: [
+    { kind: "write", q: "あなたは研究者ですか。（你是學生，不是研究者）", answers: ["いいえ、研究者じゃありません。学生です"], includes: [["いいえ"], ["研究者じゃありません", "研究者ではありません"], ["学生"]] },
+    { kind: "write", q: "失礼ですが、おいくつですか。（以 20 歲作答。不要寫成にじゅっさい）", answers: ["20歳です", "はたちです"], includes: [["20歳です", "２０歳です", "はたちです"]] },
+    { kind: "write", q: "お国はどちらですか。（以中國作答）", answers: ["中国です"], includes: [["中国", "ちゅうごく"]] },
+    { kind: "write", q: "毎日何時に起きますか。（以早上 7 點作答）", answers: ["7時に起きます"], includes: [["7時", "７時", "しちじ"], ["に"], ["起きます", "おきます"]] }
+  ]},
+  { part: "A5", title: "五、對話填空（仿 Quiz 2 第5題）", lead: "填日語。助詞、です、じゃありません 都可能是空。", items: [
+    { kind: "write", q: "A：初めまして。ワットです。イギリスから来ました。どうぞ ______ お願いします。", answers: ["よろしく"] },
+    { kind: "write", q: "B：______ よろしくお願いいたします。", answers: ["こちらこそ"] },
+    { kind: "write", q: "B：ワットさんは学生 ______ 。", answers: ["ですか"] },
+    { kind: "write", q: "A：いいえ、わたしは学生 ______ 。教師です。", answers: ["じゃありません", "ではありません"] },
+    { kind: "write", q: "C：すみません。これは ______ 傘ですか。", answers: ["だれの", "どなたの"] },
+    { kind: "write", q: "A：あ、______ です。", answers: ["わたしの"] },
+    { kind: "write", q: "B：それは ______ 本ですか。", answers: ["何の", "なんの"] },
+    { kind: "write", q: "A：______ の本です。", answers: ["日本語", "にほんご"] }
+  ]},
+  { part: "B1", title: "六、第3–4課：選出正確的一句", lead: "點選後可按「批改」。", items: [
+    { kind: "choice", q: "「這個是英語書。」", options: ["このは英語の本です。", "これは英語の本です。", "これの本は英語です。"], answer: 1 },
+    { kind: "choice", q: "「這本書是我的。」名詞已出現，後面省略。", options: ["この本はわたしです。", "この本はわたしのです。", "この本はわたのです。"], answer: 1 },
+    { kind: "choice", q: "種類的「の」不能省掉名詞。哪句正確？", options: ["コンピューターのです。", "コンピューターの本です。", "何のですか。"], answer: 1 },
+    { kind: "choice", q: "「洗手間在那邊（禮貌、較遠）。」", options: ["トイレはあそこですか。", "お手洗いはあちらです。", "お手洗いはこのです。"], answer: 1 },
+    { kind: "choice", q: "具體時刻後面、動詞前面要用？　6時 ______ 起きます。", options: ["に", "で", "を", "（空白，不加助詞）"], answer: 0 },
+    { kind: "choice", q: "「今天」要不要加 に？　きょう ______ 勉強します。", options: ["に", "（不加に）", "から"], answer: 1 },
+    { kind: "choice", q: "昨天沒有學習。", options: ["きのう勉強しませんでした。", "きのう勉強しませんます。", "きのう勉強しないでした。"], answer: 0 },
+    { kind: "choice", q: "明天休假，用哪一句？", options: ["あした休みました。", "あした休みます。", "あしたに休みます。"], answer: 1 }
+  ]},
+  { part: "B2", title: "七、看對話判斷（課堂問題2的考法）", lead: "依對話，那一句總結是對還是錯。", items: [
+    { kind: "ox", q: "A：食堂はどこですか。 B：あそこです。 A：事務所は？ B：そこです。　總結：食堂はあそこです。", answer: true },
+    { kind: "ox", q: "A：時計売り場はどこですか。 B：8階です。　總結：時計売り場は1階です。", answer: false, why: "對話說的是 8階（はっかい）。" },
+    { kind: "ox", q: "A：この時計はいくらですか。 B：23600円です。　總結：この時計は23800円です。", answer: false, why: "23600 是 にまんさんぜんろっぴゃくえん，不是 23800。" },
+    { kind: "ox", q: "A：きょうも10時まで働きますか。 B：いいえ、5時に終わります。　總結：ミラーさんはきょう10時まで働きます。", answer: false, why: "回答已經是否定，今天 5 時結束。" },
+    { kind: "ox", q: "A：休みは何曜日ですか。 B：月曜日です。　總結：月曜日、図書館は休みです。", answer: true },
+    { kind: "ox", q: "A：大学は何時からですか。 B：9時からです。 A：何時に終わりますか。 B：4時に終わります。　總結：カリナさんは9時から5時まで勉強します。", answer: false, why: "結束時間是 4時，不是 5時；而且對話沒有說「勉強します」。" }
+  ]},
+  { part: "B3", title: "八、動詞四形", lead: "寫出指定形式。", items: [
+    { kind: "write", q: "起きます → 否定（現在／將來）", answers: ["起きません"] },
+    { kind: "write", q: "起きます → 過去", answers: ["起きました"] },
+    { kind: "write", q: "勉強します → 過去否定", answers: ["勉強しませんでした"] },
+    { kind: "write", q: "働きます → 否定", answers: ["働きません"] },
+    { kind: "write", q: "休みます → 過去", answers: ["休みました"] },
+    { kind: "write", q: "終わります → 過去否定", answers: ["終わりませんでした"] }
+  ]},
+  { part: "B4", title: "九、第3–4課對話填空", lead: "", items: [
+    { kind: "write", q: "すみません。ワイン売り場は ______ ですか。", answers: ["どこ", "どちら"] },
+    { kind: "write", q: "地下1階です。このワインは ______ ですか。（問價錢）", answers: ["いくら"] },
+    { kind: "write", q: "2500円です。じゃ、これ ______ ください。", answers: ["を"] },
+    { kind: "write", q: "銀行は9時 ______ 3時までです。", answers: ["から"] },
+    { kind: "write", q: "銀行は9時から3時 ______ です。", answers: ["まで"] },
+    { kind: "write", q: "わたしは毎朝6時 ______ 起きます。", answers: ["に"] },
+    { kind: "write", q: "休みは土曜日 ______ 日曜日です。", answers: ["と"] },
+    { kind: "write", q: "きのう勉強しましたか。……いいえ、______ 。", answers: ["勉強しませんでした"] },
+    { kind: "write", q: "そちらは何時までですか。……10時 ______ です。", answers: ["まで"] }
+  ]}
+];
+
+let voice = null;
+let voiceReady = false;
+function pickVoice() {
+  const list = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+  voice = list.find(v => /ja[-_]JP/i.test(v.lang)) || list.find(v => /^ja/i.test(v.lang)) || null;
+  voiceReady = list.length > 0;
+  const banner = document.getElementById("voiceBanner");
+  if (banner) banner.classList.toggle("hidden", !voiceReady || !!voice);
+}
+if ("speechSynthesis" in window) {
+  pickVoice();
+  window.speechSynthesis.onvoiceschanged = pickVoice;
+}
+
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.style.display = "block";
+  clearTimeout(toast._h);
+  toast._h = setTimeout(() => { t.style.display = "none"; }, 2400);
+}
+
+let speakToken = 0;
+function speak(text, btn) {
+  if (!("speechSynthesis" in window)) {
+    toast("這個瀏覽器不能朗讀，請改用 Chrome 或 Edge。");
+    return;
+  }
+  const synth = window.speechSynthesis;
+  pickVoice();
+  const token = ++speakToken;
+  synth.resume();
+  synth.cancel();
+  document.querySelectorAll("button.speak.on").forEach(b => b.classList.remove("on"));
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ja-JP";
+  u.rate = 0.92;
+  if (voice) u.voice = voice;
+  let started = false;
+  u.onstart = () => { started = true; };
+  u.onend = () => { if (token === speakToken && btn) btn.classList.remove("on"); };
+  u.onerror = () => { if (token === speakToken && btn) btn.classList.remove("on"); };
+  if (btn) btn.classList.add("on");
+  synth.speak(u);
+  if (synth.paused) synth.resume();
+  window.setTimeout(() => {
+    if (token !== speakToken || started || synth.speaking || synth.pending) return;
+    const again = new SpeechSynthesisUtterance(text);
+    again.lang = "ja-JP";
+    again.rate = 0.92;
+    if (voice) again.voice = voice;
+    again.onend = () => btn && btn.classList.remove("on");
+    again.onerror = () => btn && btn.classList.remove("on");
+    synth.speak(again);
+  }, 250);
+}
+
+function stopSpeak() {
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  document.querySelectorAll("button.speak.on").forEach(b => b.classList.remove("on"));
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function speakOf(item) {
+  if (item[3]) return item[3];
+  return item[0].replace(/^[～〜]+/, "").replace(/[～〜]+$/g, "");
+}
+
+const KNOWN = "japn1004-known-v1";
+function knownSet() {
+  try { return new Set(JSON.parse(localStorage.getItem(KNOWN) || "[]")); }
+  catch (e) { return new Set(); }
+}
+function saveKnown(set) {
+  localStorage.setItem(KNOWN, JSON.stringify([...set]));
+}
+
+function cardHTML(item, key) {
+  const kana = item[0];
+  const kanji = item[1];
+  const zh = item[2];
+  const say = speakOf(item);
+  const head = kanji || kana;
+  const sub = kanji ? kana : "";
+  return `<article class="vcard" data-key="${esc(key)}" data-find="${esc((kana + kanji + zh).toLowerCase())}">
+    <div class="word">
+      <span class="kanji jp">${esc(head)}</span>
+      ${sub ? `<span class="kana">${esc(sub)}</span>` : ""}
+      <span class="zh">${esc(zh)}</span>
+    </div>
+    <div class="tools">
+      <button class="speak" type="button" data-say="${esc(say)}" aria-label="播放 ${esc(say)}">${SPEAKER}</button>
+      <button class="know" type="button">會了</button>
+    </div>
+  </article>`;
+}
+
+function examplesHTML(lines) {
+  return lines.map(line => `<div class="exline"><span class="ex jp">${esc(line)}</span><button class="speak" type="button" data-say="${esc(line)}" aria-label="播放例句">${SPEAKER}</button></div>`).join("");
+}
+
+function renderLessons() {
+  return LESSONS.map(ls => {
+    const groups = ls.groups.map(g => `<h3>${esc(g.name)}</h3><div class="grid">${g.items.map((it, i) => cardHTML(it, ls.id + "-" + g.name + "-" + i)).join("")}</div>`).join("");
+    const blocks = ls.blocks.map(b => `<div class="block"><h3>${esc(b.h)}</h3><p>${esc(b.p)}</p>${examplesHTML(b.ex)}</div>`).join("");
+    const lines = ls.dialogue.map(([w, t]) => `<p><span class="who">${esc(w)}：</span><span class="jp">${esc(t)}</span> <button class="speak" type="button" data-say="${esc(t)}" aria-label="播放這一句">${SPEAKER}</button></p>`).join("");
+    const people = ls.people ? `<h3>登場人物</h3><div class="table-wrap"><table class="plain"><thead><tr><th>名前</th><th>年齡</th><th>國籍</th><th>職業／所屬</th></tr></thead><tbody>${ls.people.map(r => `<tr>${r.map(c => `<td class="jp">${esc(c) || "—"}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : "";
+    const traps = `<div class="warn"><strong>這一課最容易錯</strong><ul>${ls.traps.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>`;
+    return `<section id="${ls.id}">
+      <p class="lesson-kicker">${esc(ls.kicker)}</p>
+      <h2 class="jp">${esc(ls.title)}</h2>
+      <p class="jp">${esc(ls.sub)}</p>
+      <p>${esc(ls.lead)}</p>
+      ${groups}
+      <h3>文法</h3>
+      ${blocks}
+      ${people}
+      <h3>課文重點</h3>
+      <div class="dlg">${lines}<p>${esc(ls.dialogueNote)}</p></div>
+      ${traps}
+    </section>`;
+  }).join("");
+}
+
+function renderCharts() {
+  const main = CHARTS.map(ch => `<h3 id="${ch.id}">${esc(ch.title)}</h3><p>${esc(ch.note)}</p><div class="grid">${ch.rows.map((r, i) => cardHTML([r[1], r[0], "讀音"], "ch-" + ch.id + "-" + i)).join("")}</div>`).join("");
+  const extra = APPENDIX.map((r, i) => cardHTML([r[1], r[0], r[2]], "ap-" + i)).join("");
+  return `<section id="numbers">
+    <h2>數字、時間、樓層、價錢</h2>
+    <p>Quiz 2 已經考了 50、67 和年齡。第3課考樓層和價錢，第4課考時、分。下面每一格都可以聽。</p>
+    <div class="note">小數（17.5、0.83）和分數，筆記上標了不考。</div>
+    ${main}
+    <details class="fold">
+      <summary>課本附錄：月、日、週、年（時間 PDF）</summary>
+      <p>第4課正文以時刻和星期為主。這份附錄的讀音規則相通，尤其是 4月しがつ、7月しちがつ、9月くがつ、1日ついたち、20日はつか。</p>
+      <div class="grid">${extra}</div>
+    </details>
+  </section>`;
+}
+
+function renderQuiz() {
+  const parts = QUIZ.map(part => {
+    const items = part.items.map((it, idx) => {
+      const id = part.part + "-" + idx;
+      if (it.kind === "choice") {
+        const opts = it.options.map((op, i) => `<label class="exline"><input type="radio" name="${id}" value="${i}"> <span class="jp">${esc(op)}</span></label>`).join("");
+        return `<div class="q" data-qid="${id}" data-kind="choice" data-answer="${it.answer}"><p class="prompt">${esc(it.q)}</p>${opts}<div class="row"><button class="check" type="button">批改</button></div><p class="feedback"></p></div>`;
+      }
+      if (it.kind === "ox") {
+        return `<div class="q" data-qid="${id}" data-kind="ox" data-answer="${it.answer ? "1" : "0"}" data-why="${esc(it.why || "")}"><p class="prompt jp">${esc(it.q)}</p><div class="row"><label><input type="radio" name="${id}" value="1"> ○ 對</label><label><input type="radio" name="${id}" value="0"> × 錯</label><button class="check" type="button">批改</button></div><p class="feedback"></p></div>`;
+      }
+      const inc = it.includes ? ` data-includes="${esc(JSON.stringify(it.includes))}"` : "";
+      return `<div class="q" data-qid="${id}" data-kind="write" data-answers="${esc(JSON.stringify(it.answers))}"${inc}><p class="prompt"><span class="jp">${esc(it.q)}</span>${it.hint ? ` <span class="zh">（${esc(it.hint)}）</span>` : ""}</p><div class="row"><input class="ans" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="輸入日語">${it.speak ? `<button class="speak" type="button" data-say="${esc(it.speak)}" aria-label="播放題目">${SPEAKER}</button>` : ""}<button class="check" type="button">批改</button><button class="reveal" type="button">答案</button></div><p class="feedback"></p></div>`;
+    }).join("");
+    return `<h3>${esc(part.title)}</h3>${part.lead ? `<p>${esc(part.lead)}</p>` : ""}${items}`;
+  }).join("");
+  return `<section id="quiz">
+    <h2>模擬練習</h2>
+    <p>題型和 Quiz 2 相同：漢字、平假名、片假名、短答、對話填空。後面加上第3–4課的判斷和動詞。正式考試要手寫；這裡打字批改，也可以按「答案」對一次。</p>
+    <div class="row noprint" style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px">
+      <button class="btn" type="button" id="gradeAll">批改已作答</button>
+      <button class="reveal" type="button" id="revealAll">顯示全部答案</button>
+    </div>
+    <p class="score" id="scoreLine"></p>
+    ${parts}
+  </section>`;
+}
+
+function renderMap() {
+  return `<section id="map">
+    <h2>星期四考什麼</h2>
+    <p>課表 Week 9 的星期四是 Midterm Examination，範圍 Lesson 1–4。上次 Quiz 2 只到第1–2課，所以第3課的樓層、價錢、第4課的時間和動詞是新範圍。</p>
+    <div class="table-wrap"><table class="plain">
+      <thead><tr><th>課</th><th>要會用的句子</th><th>例</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="jp">N1 は N2 です／じゃありません／ですか。も。</td><td class="jp">わたしは学生です。</td></tr>
+        <tr><td>2</td><td class="jp">これ／この。そうです／違います。だれの／何の。</td><td class="jp">この本はわたしのです。</td></tr>
+        <tr><td>3</td><td class="jp">ここ／どこ／どちら。いくら。どこの。</td><td class="jp">トイレはあそこです。</td></tr>
+        <tr><td>4</td><td class="jp">今何時。～時に。～から～まで。ます／ました。</td><td class="jp">6時に起きます。</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">自介可以先背這一段，再把名字和國家換成自己的。<div class="exline"><span class="ex jp">初めまして。ミラーです。アメリカから来ました。マカオ大学の学生です。どうぞよろしくお願いします。</span><button class="speak" type="button" data-say="初めまして。ミラーです。アメリカから来ました。マカオ大学の学生です。どうぞよろしくお願いします。" aria-label="播放自介">${SPEAKER}</button></div></div>
+    <h3 id="traps">十個最容易扣分的地方</h3>
+    <ol>
+      <li>助詞「は」讀 wa。「も」取代「は」，不說「はも」。</li>
+      <li>口語「じゃありません」，書寫「ではありません」。兩種都對。</li>
+      <li>問身份不答「そうです」。問東西、地點才用「はい、そうです／いいえ、違います」。</li>
+      <li>これ 後面直接「は」；この 後面必須有名詞。×このは。</li>
+      <li>だれのです ○。何の本です ○。何のです ×。どこのです ○。</li>
+      <li>20歳 はたち。1歳 いっさい。8歳 はっさい。10歳 じゅっさい。</li>
+      <li>4時よじ、7時しちじ、9時くじ。1分いっぷん、8分はっぷん、10分じゅっぷん。</li>
+      <li>3階さんがい、何階なんがい。300さんびゃく、600ろっぴゃく、800はっぴゃく、3000さんぜん、8000はっせん。</li>
+      <li>6時に起きます ○。きょうに／まいあさに／今に ×。</li>
+      <li>ます 包含習慣和將來。昨天用 ました／ませんでした。動詞問句不答「そうです」。</li>
+    </ol>
+  </section>`;
+}
+
+function renderFlash() {
+  return `<section id="cards">
+    <h2>生字卡</h2>
+    <p>先看中文，回想日語，再翻面。翻面時會朗讀。</p>
+    <div class="chips noprint">
+      <button class="reveal" type="button" data-deck="all">全部</button>
+      <button class="reveal" type="button" data-deck="l1">第1課</button>
+      <button class="reveal" type="button" data-deck="l2">第2課</button>
+      <button class="reveal" type="button" data-deck="l3">第3課</button>
+      <button class="reveal" type="button" data-deck="l4">第4課</button>
+    </div>
+    <div class="flash" id="flash">
+      <p class="zh" id="flashMeta">按上面的課次開始</p>
+      <p class="flash-zh" id="flashZh"></p>
+      <p class="flash-jp hidden" id="flashJp"></p>
+      <div class="row" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button class="btn" type="button" id="flashShow">翻面</button>
+        <button class="reveal" type="button" id="flashNext">下一張</button>
+      </div>
+    </div>
+  </section>`;
+}
+
+function allVocab() {
+  const out = [];
+  LESSONS.forEach(ls => ls.groups.forEach(g => g.items.forEach(it => out.push({ lesson: ls.id, kana: speakOf(it), label: (it[1] || it[0]), zh: it[2] }))));
+  return out;
+}
+
+let deck = [];
+let deckI = 0;
+function showCard() {
+  const zh = document.getElementById("flashZh");
+  const jp = document.getElementById("flashJp");
+  const meta = document.getElementById("flashMeta");
+  if (!deck.length) { meta.textContent = "這一疊是空的"; return; }
+  const c = deck[deckI % deck.length];
+  meta.textContent = `${deckI % deck.length + 1} / ${deck.length}`;
+  zh.textContent = c.zh;
+  jp.textContent = c.label + (c.label !== c.kana ? "　" + c.kana : "");
+  jp.dataset.say = c.kana;
+  jp.classList.add("hidden");
+}
+
+function norm(s) {
+  return String(s || "").replace(/[\s\u3000]/g, "").replace(/[。．.、,，]/g, "").replace(/[〜～]/g, "").replace(/[－–—\-]/g, "");
+}
+function gradeWrite(box, revealOnly) {
+  const answers = JSON.parse(box.dataset.answers);
+  const input = box.querySelector("input.ans");
+  const fb = box.querySelector(".feedback");
+  if (revealOnly) {
+    fb.innerHTML = "答案：<span class=\"jp\">" + esc(answers.join(" ／ ")) + "</span>";
+    return null;
+  }
+  if (!input.value.trim()) { fb.textContent = "還沒填。"; box.classList.remove("ok", "bad"); return null; }
+  const value = norm(input.value);
+  let ok = answers.some(a => value === norm(a));
+  if (!ok && box.dataset.includes) {
+    const groups = JSON.parse(box.dataset.includes);
+    ok = groups.every(group => group.some(g => value.includes(norm(g))));
+  }
+  box.classList.toggle("ok", ok);
+  box.classList.toggle("bad", !ok);
+  fb.innerHTML = ok ? "對。" : "還不是。答案：<span class=\"jp\">" + esc(answers.join(" ／ ")) + "</span>";
+  return ok;
+}
+function gradeChoice(box) {
+  const picked = box.querySelector("input:checked");
+  const fb = box.querySelector(".feedback");
+  if (!picked) { fb.textContent = "還沒選。"; return null; }
+  const ok = picked.value === String(box.dataset.answer);
+  box.classList.toggle("ok", ok);
+  box.classList.toggle("bad", !ok);
+  const right = box.querySelectorAll("input")[Number(box.dataset.answer)];
+  const label = right ? right.parentElement.textContent.trim() : "";
+  fb.textContent = ok ? "對。" : "答案是：" + label;
+  return ok;
+}
+function gradeOx(box) {
+  const picked = box.querySelector("input:checked");
+  const fb = box.querySelector(".feedback");
+  if (!picked) { fb.textContent = "還沒選。"; return null; }
+  const ok = picked.value === box.dataset.answer;
+  box.classList.toggle("ok", ok);
+  box.classList.toggle("bad", !ok);
+  const ans = box.dataset.answer === "1" ? "○" : "×";
+  fb.textContent = (ok ? "對。" : "答案是 " + ans + "。") + (box.dataset.why || "");
+  return ok;
+}
+function gradeBox(box, revealOnly) {
+  const kind = box.dataset.kind;
+  const fb = box.querySelector(".feedback");
+  if (revealOnly && kind === "choice") {
+    const right = box.querySelectorAll("input")[Number(box.dataset.answer)];
+    fb.textContent = "答案：" + (right ? right.parentElement.textContent.trim() : "");
+    return null;
+  }
+  if (revealOnly && kind === "ox") {
+    fb.textContent = "答案：" + (box.dataset.answer === "1" ? "○ 對" : "× 錯") + (box.dataset.why ? " " + box.dataset.why : "");
+    return null;
+  }
+  if (kind === "write") return gradeWrite(box, revealOnly);
+  if (kind === "choice") return gradeChoice(box);
+  if (kind === "ox") return gradeOx(box);
+  return null;
+}
+
+function bind() {
+  document.body.addEventListener("click", e => {
+    const speakBtn = e.target.closest("button.speak");
+    if (speakBtn) { speak(speakBtn.dataset.say, speakBtn); return; }
+    const know = e.target.closest("button.know");
+    if (know) {
+      const card = know.closest(".vcard");
+      const set = knownSet();
+      if (set.has(card.dataset.key)) { set.delete(card.dataset.key); card.classList.remove("known"); know.textContent = "會了"; }
+      else { set.add(card.dataset.key); card.classList.add("known"); know.textContent = "再看"; }
+      saveKnown(set);
+      return;
+    }
+    if (e.target.id === "stopLink") { e.preventDefault(); stopSpeak(); toast("已停止"); return; }
+    const check = e.target.closest("button.check");
+    if (check) { gradeBox(check.closest(".q"), false); return; }
+    const rev = e.target.closest(".q button.reveal");
+    if (rev) { gradeBox(rev.closest(".q"), true); return; }
+    const deckBtn = e.target.closest("[data-deck]");
+    if (deckBtn) {
+      const id = deckBtn.dataset.deck;
+      const all = allVocab();
+      deck = (id === "all" ? all : all.filter(x => x.lesson === id)).slice();
+      for (let i = deck.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [deck[i], deck[j]] = [deck[j], deck[i]]; }
+      deckI = 0; showCard(); return;
+    }
+    if (e.target.id === "flashShow") {
+      const jp = document.getElementById("flashJp");
+      jp.classList.remove("hidden");
+      if (jp.dataset.say) speak(jp.dataset.say, null);
+      return;
+    }
+    if (e.target.id === "flashNext") { deckI++; showCard(); return; }
+    if (e.target.id === "gradeAll") {
+      let ok = 0, n = 0;
+      document.querySelectorAll("#quiz .q").forEach(box => {
+        const r = gradeBox(box, false);
+        if (r === false || r === true) { n++; if (r) ok++; }
+      });
+      document.getElementById("scoreLine").textContent = n ? `已作答 ${n} 題，對了 ${ok} 題。` : "還沒有作答。";
+      return;
+    }
+    if (e.target.id === "revealAll") {
+      document.querySelectorAll("#quiz .q").forEach(box => gradeBox(box, true));
+    }
+  });
+
+  const search = document.getElementById("search");
+  search.addEventListener("input", () => {
+    const q = search.value.trim().toLowerCase();
+    document.querySelectorAll(".vcard").forEach(card => {
+      card.classList.toggle("hidden", q && !card.dataset.find.includes(q));
+    });
+  });
+
+  const set = knownSet();
+  document.querySelectorAll(".vcard").forEach(card => {
+    if (set.has(card.dataset.key)) {
+      card.classList.add("known");
+      card.querySelector(".know").textContent = "再看";
+    }
+  });
+}
+
+const vocabCount = LESSONS.reduce((n, ls) => n + ls.groups.reduce((m, g) => m + g.items.length, 0), 0);
+document.getElementById("countPill").textContent = `課本生字 ${vocabCount} 項，都可以聽`;
+document.getElementById("app").innerHTML = `
+  <label class="noprint" for="search">搜尋生字</label>
+  <input class="search noprint" id="search" placeholder="搜尋漢字、假名或中文，例如 病院、じ、傘" autocomplete="off">
+  ${renderMap()}
+  ${renderLessons()}
+  ${renderCharts()}
+  ${renderFlash()}
+  ${renderQuiz()}
+`;
+bind();
+document.getElementById("stopLink").addEventListener("click", e => { e.preventDefault(); stopSpeak(); });
+window.setTimeout(pickVoice, 400);
+window.setTimeout(pickVoice, 1200);
+</script>
+</body>
+</html>
