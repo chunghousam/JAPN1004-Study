@@ -2,6 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="澳門大學 JAPN1004 Elementary Japanese I 第1–4課期中溫習：生字、文法、課文重點、模擬練習，附日語發音。">
 <title>JAPN1004 第1–4課 期中溫習</title>
@@ -181,7 +182,25 @@
     margin: 8px 0;
   }
   .ex-pair { display: flex; flex-direction: column; flex: 1; min-width: 0; }
-  .ex { font-size: 1.08rem; }
+  .ex { font-size: 1.08rem; line-height: 2.05; }
+  .jp { line-height: 2.05; }
+  .yomi {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: bottom;
+    line-height: 1;
+    margin: 0 0.04em;
+  }
+  .yomi-rt {
+    font-size: 0.58em;
+    line-height: 1.15;
+    font-weight: 500;
+    color: var(--teal);
+    user-select: none;
+    white-space: nowrap;
+  }
+  .yomi-rb { line-height: 1.25; }
   .ex-zh, .title-zh {
     color: var(--muted);
     font-size: .95rem;
@@ -299,7 +318,7 @@
 <header class="top">
   <p class="eyebrow">University of Macau · JAPN1004 · 2026/2027 Semester 1</p>
   <h1>第1–4課　期中溫習</h1>
-  <p class="lede">Elementary Japanese I。範圍是《大家的日本語 初級Ⅰ 改訂版》第1課到第4課。每個生字旁邊的紅鈕會用瀏覽器朗讀日語（ja-JP）。</p>
+  <p class="lede">Elementary Japanese I。範圍是《大家的日本語 初級Ⅰ 改訂版》第1課到第4課。漢字上面是讀音。電腦用系統日語朗讀；手機改播日語語音，請關掉靜音並保持網路連線。</p>
   <div class="meta">
     <span class="pill">期中考 <strong>10月15日（星期四）</strong></span>
     <span class="pill">名詞句・指示詞・場所・時間と動詞</span>
@@ -324,7 +343,7 @@
 <main id="app"></main>
 <p class="toast" id="toast" role="status"></p>
 <footer>
-  <p>依 JAPN1004 講義、生字表、數字／時間附錄，以及 Quiz 2（第1–2課）的題型整理，供 10 月 15 日期中前溫習。語音是瀏覽器的語音合成，不是課本錄音。建議用 Chrome 或 Edge，並保持網路連線，日語才讀得準。</p>
+  <p>依 JAPN1004 講義、生字表、數字／時間附錄，以及 Quiz 2（第1–2課）的題型整理，供 10 月 15 日期中前溫習。電腦用系統日語。手機若沒有日語語音，按鈕會改播日語錄音；靜音開關會讓這段錄音沒有聲音。建議用 Chrome 或 Edge。</p>
 </footer>
 <script>
 const SPEAKER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/></svg>';
@@ -887,12 +906,287 @@ const QUIZ = [
 
 let voice = null;
 let voiceReady = false;
+let phoneAudio = null;
+let audioToken = 0;
+const RUBY = [
+  ["お願いいたします", "おねがいいたします"],
+  ["初めまして", "はじめまして"],
+  ["勉強しませんでした", "べんきょうしませんでした"],
+  ["終わりませんでした", "おわりませんでした"],
+  ["おはようございます", "おはようございます"],
+  ["自動販売機", "じどうはんばいき"],
+  ["電話番号", "でんわばんごう"],
+  ["さくら大学", "さくらだいがく"],
+  ["マカオ大学", "マカオだいがく"],
+  ["パワー電気", "パワーでんき"],
+  ["富士大学", "ふじだいがく"],
+  ["神戸病院", "こうべびょういん"],
+  ["見せてください", "みせてください"],
+  ["失礼ですが", "しつれいですが"],
+  ["勉強しました", "べんきょうしました"],
+  ["勉強します", "べんきょうします"],
+  ["働きました", "はたらきました"],
+  ["働きません", "はたらきません"],
+  ["休みました", "やすみました"],
+  ["終わります", "おわります"],
+  ["お願いします", "おねがいします"],
+  ["アメリカ人", "アメリカじん"],
+  ["イギリス人", "イギリスじん"],
+  ["ドイツ人", "ドイツじん"],
+  ["インドネシア人", "インドネシアじん"],
+  ["韓国人", "かんこくじん"],
+  ["中国語", "ちゅうごくご"],
+  ["中国人", "ちゅうごくじん"],
+  ["日本人", "にほんじん"],
+  ["会社員", "かいしゃいん"],
+  ["銀行員", "ぎんこういん"],
+  ["研究者", "けんきゅうしゃ"],
+  ["美術館", "びじゅつかん"],
+  ["図書館", "としょかん"],
+  ["郵便局", "ゆうびんきょく"],
+  ["会議室", "かいぎしつ"],
+  ["事務所", "じむしょ"],
+  ["お手洗い", "おてあらい"],
+  ["昼休み", "ひるやすみ"],
+  ["売り場", "うりば"],
+  ["違います", "ちがいます"],
+  ["何曜日", "なんようび"],
+  ["月曜日", "げつようび"],
+  ["火曜日", "かようび"],
+  ["水曜日", "すいようび"],
+  ["木曜日", "もくようび"],
+  ["金曜日", "きんようび"],
+  ["土曜日", "どようび"],
+  ["日曜日", "にちようび"],
+  ["一昨日", "おととい"],
+  ["明後日", "あさって"],
+  ["23800円", "にまんさんぜんはっぴゃくえん"],
+  ["23600円", "にまんさんぜんろっぴゃくえん"],
+  ["2500円", "にせんごひゃくえん"],
+  ["1500円", "せんごひゃくえん"],
+  ["午前0時10分", "ごぜんれいじじゅっぷん"],
+  ["4時5分", "よじごふん"],
+  ["2時10分", "にじじゅっぷん"],
+  ["地下1階", "ちかいっかい"],
+  ["7時半", "しちじはん"],
+  ["38歳", "さんじゅうはっさい"],
+  ["28歳", "にじゅうはっさい"],
+  ["24歳", "にじゅうよんさい"],
+  ["21歳", "にじゅういっさい"],
+  ["20歳", "はたち"],
+  ["16歳", "じゅうろくさい"],
+  ["11時", "じゅういちじ"],
+  ["12時", "じゅうにじ"],
+  ["10時", "じゅうじ"],
+  ["23時", "にじゅうさんじ"],
+  ["10歳", "じゅっさい"],
+  ["10分", "じゅっぷん"],
+  ["15分", "じゅうごふん"],
+  ["30分", "さんじゅっぷん"],
+  ["8階", "はっかい"],
+  ["6階", "ろっかい"],
+  ["3階", "さんがい"],
+  ["2階", "にかい"],
+  ["1階", "いっかい"],
+  ["9時", "くじ"],
+  ["8時", "はちじ"],
+  ["7時", "しちじ"],
+  ["6時", "ろくじ"],
+  ["5時", "ごじ"],
+  ["4時", "よじ"],
+  ["3時", "さんじ"],
+  ["2時", "にじ"],
+  ["1時", "いちじ"],
+  ["0時", "れいじ"],
+  ["8分", "はっぷん"],
+  ["6分", "ろっぷん"],
+  ["4分", "よんぷん"],
+  ["3分", "さんぷん"],
+  ["1分", "いっぷん"],
+  ["5分", "ごふん"],
+  ["9歳", "きゅうさい"],
+  ["8歳", "はっさい"],
+  ["1歳", "いっさい"],
+  ["新大阪", "しんおおさか"],
+  ["疑問詞", "ぎもんし"],
+  ["名詞句", "めいしく"],
+  ["動詞句", "どうしく"],
+  ["何の", "なんの"],
+  ["時間", "じかん"],
+  ["銀行", "ぎんこう"],
+  ["名詞", "めいし"],
+  ["動詞", "どうし"],
+  ["文型", "ぶんけい"],
+  ["何", "なん"],
+  ["何歳", "なんさい"],
+  ["何階", "なんがい"],
+  ["何番", "なんばん"],
+  ["何時", "なんじ"],
+  ["何分", "なんぷん"],
+  ["あの人", "あのひと"],
+  ["あの方", "あのかた"],
+  ["働きます", "はたらきます"],
+  ["休みます", "やすみます"],
+  ["起きます", "おきます"],
+  ["寝ました", "ねました"],
+  ["来ました", "きました"],
+  ["教室", "きょうしつ"],
+  ["食堂", "しょくどう"],
+  ["学生", "がくせい"],
+  ["先生", "せんせい"],
+  ["教師", "きょうし"],
+  ["医者", "いしゃ"],
+  ["大学", "だいがく"],
+  ["病院", "びょういん"],
+  ["社員", "しゃいん"],
+  ["辞書", "じしょ"],
+  ["雑誌", "ざっし"],
+  ["新聞", "しんぶん"],
+  ["手帳", "てちょう"],
+  ["名刺", "めいし"],
+  ["鉛筆", "えんぴつ"],
+  ["時計", "とけい"],
+  ["日本語", "にほんご"],
+  ["英語", "えいご"],
+  ["中国", "ちゅうごく"],
+  ["日本", "にほん"],
+  ["韓国", "かんこく"],
+  ["田中", "たなか"],
+  ["佐藤", "さとう"],
+  ["山田", "やまだ"],
+  ["受付", "うけつけ"],
+  ["部屋", "へや"],
+  ["階段", "かいだん"],
+  ["電気", "でんき"],
+  ["土産", "みやげ"],
+  ["試験", "しけん"],
+  ["会議", "かいぎ"],
+  ["映画", "えいが"],
+  ["番号", "ばんごう"],
+  ["大変", "たいへん"],
+  ["失礼", "しつれい"],
+  ["名前", "なまえ"],
+  ["お世話", "おせわ"],
+  ["勉強", "べんきょう"],
+  ["休み", "やすみ"],
+  ["今朝", "けさ"],
+  ["今晩", "こんばん"],
+  ["毎日", "まいにち"],
+  ["毎朝", "まいあさ"],
+  ["毎晩", "まいばん"],
+  ["今日", "きょう"],
+  ["昨日", "きのう"],
+  ["明日", "あした"],
+  ["午前", "ごぜん"],
+  ["午後", "ごご"],
+  ["地下", "ちか"],
+  ["傘", "かさ"],
+  ["鍵", "かぎ"],
+  ["車", "くるま"],
+  ["靴", "くつ"],
+  ["本", "ほん"],
+  ["私", "わたし"],
+  ["机", "つくえ"],
+  ["胡", "こ"],
+  ["李", "り"],
+  ["朝", "あさ"],
+  ["昼", "ひる"],
+  ["晩", "ばん"],
+  ["夜", "よる"],
+  ["今", "いま"],
+  ["半", "はん"],
+  ["円", "えん"],
+  ["歳", "さい"],
+  ["階", "かい"],
+  ["時", "じ"],
+  ["分", "ふん"],
+  ["国", "くに"],
+  ["語", "ご"]
+].sort((a, b) => b[0].length - a[0].length);
+
+function isKanji(ch) {
+  return /[\u3400-\u9fff]/.test(ch || "");
+}
+let segText = "";
+let segReach = null;
+function reaches(text) {
+  if (text === segText && segReach) return segReach;
+  const n = text.length;
+  const can = Array.from({ length: n + 1 }, () => new Uint8Array(n + 1));
+  for (let s = 0; s <= n; s++) can[s][s] = 1;
+  for (let s = n - 1; s >= 0; s--) {
+    for (let k = 0; k < RUBY.length; k++) {
+      const word = RUBY[k][0];
+      const nxt = s + word.length;
+      if (nxt <= n && text.startsWith(word, s)) {
+        const from = can[nxt];
+        const dest = can[s];
+        for (let e = nxt; e <= n; e++) if (from[e]) dest[e] = 1;
+      }
+    }
+  }
+  segText = text;
+  segReach = can;
+  return can;
+}
+function matchRuby(text, i) {
+  for (let k = 0; k < RUBY.length; k++) {
+    const word = RUBY[k][0];
+    if (!text.startsWith(word, i)) continue;
+    const end = i + word.length;
+    const prevKanji = i > 0 && isKanji(text[i - 1]);
+    const nextKanji = end < text.length && isKanji(text[end]);
+    if (prevKanji || nextKanji) {
+      let a = i;
+      while (a > 0 && isKanji(text[a - 1])) a--;
+      const can = reaches(text);
+      let ok = false;
+      for (let p = end; p <= text.length; p++) {
+        if (can[a][p] && (p === text.length || !isKanji(text[p]))) { ok = true; break; }
+      }
+      if (!ok) continue;
+    }
+    return RUBY[k];
+  }
+  return null;
+}
+function jpHtml(text) {
+  const s = String(text ?? "");
+  let i = 0;
+  let out = "";
+  while (i < s.length) {
+    const hit = matchRuby(s, i);
+    if (hit) {
+      out += `<span class="yomi"><span class="yomi-rt">${esc(hit[1])}</span><span class="yomi-rb">${esc(hit[0])}</span></span>`;
+      i += hit[0].length;
+    } else {
+      out += esc(s[i]);
+      i++;
+    }
+  }
+  return out;
+}
+function kanaOf(text) {
+  const s = String(text ?? "");
+  let i = 0;
+  let out = "";
+  while (i < s.length) {
+    const hit = matchRuby(s, i);
+    if (hit) { out += hit[1]; i += hit[0].length; }
+    else { out += s[i]; i++; }
+  }
+  return out;
+}
+function isPhone() {
+  const ua = navigator.userAgent || "";
+  return /Android|iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+}
 function pickVoice() {
   const list = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
   voice = list.find(v => /ja[-_]JP/i.test(v.lang)) || list.find(v => /^ja/i.test(v.lang)) || null;
   voiceReady = list.length > 0;
   const banner = document.getElementById("voiceBanner");
-  if (banner) banner.classList.toggle("hidden", !voiceReady || !!voice);
+  if (banner) banner.classList.toggle("hidden", isPhone() || !voiceReady || !!voice);
 }
 if ("speechSynthesis" in window) {
   pickVoice();
@@ -908,9 +1202,10 @@ function toast(msg) {
 }
 
 let speakToken = 0;
-function speak(text, btn) {
+function speakDesktop(text, btn) {
   if (!("speechSynthesis" in window)) {
     toast("這個瀏覽器不能朗讀，請改用 Chrome 或 Edge。");
+    if (btn) btn.classList.remove("on");
     return;
   }
   const synth = window.speechSynthesis;
@@ -918,7 +1213,6 @@ function speak(text, btn) {
   const token = ++speakToken;
   synth.resume();
   synth.cancel();
-  document.querySelectorAll("button.speak.on").forEach(b => b.classList.remove("on"));
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "ja-JP";
   u.rate = 0.92;
@@ -927,7 +1221,6 @@ function speak(text, btn) {
   u.onstart = () => { started = true; };
   u.onend = () => { if (token === speakToken && btn) btn.classList.remove("on"); };
   u.onerror = () => { if (token === speakToken && btn) btn.classList.remove("on"); };
-  if (btn) btn.classList.add("on");
   synth.speak(u);
   if (synth.paused) synth.resume();
   window.setTimeout(() => {
@@ -941,8 +1234,62 @@ function speak(text, btn) {
     synth.speak(again);
   }, 250);
 }
+function ttsUrl(text) {
+  return "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ja&q=" + encodeURIComponent(text);
+}
+function splitSpeech(text) {
+  const bits = String(text).split(/(?<=[。！？])/);
+  const out = [];
+  let buf = "";
+  bits.forEach(part => {
+    if (!part) return;
+    if (buf && (buf + part).length > 70) { out.push(buf); buf = part; }
+    else buf += part;
+  });
+  if (buf) out.push(buf);
+  return out.length ? out : [String(text)];
+}
+function speakPhone(text, btn) {
+  const token = audioToken;
+  const parts = splitSpeech(text);
+  let fell = false;
+  const fallback = () => {
+    if (fell || token !== audioToken) return;
+    fell = true;
+    if (phoneAudio) { phoneAudio.pause(); phoneAudio = null; }
+    speakDesktop(kanaOf(text), btn);
+  };
+  const playAt = (i) => {
+    if (token !== audioToken || fell) return;
+    if (i >= parts.length) { if (btn) btn.classList.remove("on"); return; }
+    const a = new Audio();
+    a.referrerPolicy = "no-referrer";
+    a.preload = "auto";
+    a.src = ttsUrl(parts[i]);
+    phoneAudio = a;
+    a.onended = () => playAt(i + 1);
+    a.onerror = fallback;
+    const p = a.play();
+    if (p && p.catch) p.catch(fallback);
+  };
+  playAt(0);
+}
+function speak(text, btn) {
+  stopSpeak();
+  if (btn) btn.classList.add("on");
+  const jaVoice = voice && /^ja/i.test(voice.lang);
+  if (!isPhone() || jaVoice) speakDesktop(text, btn);
+  else speakPhone(text, btn);
+}
 
 function stopSpeak() {
+  audioToken++;
+  speakToken++;
+  if (phoneAudio) {
+    phoneAudio.pause();
+    phoneAudio.src = "";
+    phoneAudio = null;
+  }
   if ("speechSynthesis" in window) speechSynthesis.cancel();
   document.querySelectorAll("button.speak.on").forEach(b => b.classList.remove("on"));
 }
@@ -989,21 +1336,21 @@ function examplesHTML(lines) {
   return lines.map(line => {
     const jp = Array.isArray(line) ? line[0] : line;
     const zh = Array.isArray(line) ? line[1] : "";
-    return `<div class="exline"><div class="ex-pair"><span class="ex jp">${esc(jp)}</span>${zh ? `<span class="ex-zh">${esc(zh)}</span>` : ""}</div><button class="speak" type="button" data-say="${esc(jp)}" aria-label="播放例句">${SPEAKER}</button></div>`;
+    return `<div class="exline"><div class="ex-pair"><span class="ex jp">${jpHtml(jp)}</span>${zh ? `<span class="ex-zh">${esc(zh)}</span>` : ""}</div><button class="speak" type="button" data-say="${esc(jp)}" aria-label="播放例句">${SPEAKER}</button></div>`;
   }).join("");
 }
 
 function renderLessons() {
   return LESSONS.map(ls => {
     const groups = ls.groups.map(g => `<h3>${esc(g.name)}</h3><div class="grid">${g.items.map((it, i) => cardHTML(it, ls.id + "-" + g.name + "-" + i)).join("")}</div>`).join("");
-    const blocks = ls.blocks.map(b => `<div class="block"><h3>${esc(b.h)}</h3><p>${esc(b.p)}</p>${examplesHTML(b.ex)}</div>`).join("");
-    const lines = ls.dialogue.map(([w, t, zh]) => `<p class="dlg-line"><span class="who">${esc(w)}：</span><span class="jp">${esc(t)}</span> <button class="speak" type="button" data-say="${esc(t)}" aria-label="播放這一句">${SPEAKER}</button>${zh ? `<span class="ex-zh dlg-zh">${esc(zh)}</span>` : ""}</p>`).join("");
-    const people = ls.people ? `<h3>登場人物</h3><div class="table-wrap"><table class="plain"><thead><tr><th>名前</th><th>年齡</th><th>國籍</th><th>職業／所屬</th></tr></thead><tbody>${ls.people.map(r => `<tr>${r.map(c => `<td class="jp">${esc(c) || "—"}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : "";
-    const traps = `<div class="warn"><strong>這一課最容易錯</strong><ul>${ls.traps.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>`;
+    const blocks = ls.blocks.map(b => `<div class="block"><h3>${jpHtml(b.h)}</h3><p>${esc(b.p)}</p>${examplesHTML(b.ex)}</div>`).join("");
+    const lines = ls.dialogue.map(([w, t, zh]) => `<p class="dlg-line"><span class="who">${esc(w)}：</span><span class="jp">${jpHtml(t)}</span> <button class="speak" type="button" data-say="${esc(t)}" aria-label="播放這一句">${SPEAKER}</button>${zh ? `<span class="ex-zh dlg-zh">${esc(zh)}</span>` : ""}</p>`).join("");
+    const people = ls.people ? `<h3>登場人物</h3><div class="table-wrap"><table class="plain"><thead><tr><th>名前</th><th>年齡</th><th>國籍</th><th>職業／所屬</th></tr></thead><tbody>${ls.people.map(r => `<tr>${r.map(c => `<td class="jp">${jpHtml(c) || "—"}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : "";
+    const traps = `<div class="warn"><strong>這一課最容易錯</strong><ul>${ls.traps.map(t => `<li>${jpHtml(t)}</li>`).join("")}</ul></div>`;
     return `<section id="${ls.id}">
       <p class="lesson-kicker">${esc(ls.kicker)}</p>
-      <h2><span class="jp">${esc(ls.title)}</span>${ls.zhTitle ? `<span class="title-zh">${esc(ls.zhTitle)}</span>` : ""}</h2>
-      <p class="jp">${esc(ls.sub)}</p>
+      <h2><span class="jp">${jpHtml(ls.title)}</span>${ls.zhTitle ? `<span class="title-zh">${esc(ls.zhTitle)}</span>` : ""}</h2>
+      <p class="jp">${jpHtml(ls.sub)}</p>
       ${ls.subZh ? `<p class="ex-zh">${esc(ls.subZh)}</p>` : ""}
       <p>${esc(ls.lead)}</p>
       ${groups}
@@ -1011,7 +1358,7 @@ function renderLessons() {
       ${blocks}
       ${people}
       <h3>課文重點</h3>
-      <div class="dlg">${lines}<p>${esc(ls.dialogueNote)}</p></div>
+      <div class="dlg">${lines}<p>${jpHtml(ls.dialogueNote)}</p></div>
       ${traps}
     </section>`;
   }).join("");
@@ -1040,15 +1387,15 @@ function renderQuiz() {
       if (it.kind === "choice") {
         const opts = it.options.map((op, i) => {
           const gloss = it.optionZh ? it.optionZh[i] : "";
-          return `<label class="exline"><input type="radio" name="${id}" value="${i}"> <span class="ex-pair"><span class="jp">${esc(op)}</span>${gloss ? `<span class="ex-zh">${esc(gloss)}</span>` : ""}</span></label>`;
+          return `<label class="exline"><input type="radio" name="${id}" value="${i}"> <span class="ex-pair"><span class="jp">${jpHtml(op)}</span>${gloss ? `<span class="ex-zh">${esc(gloss)}</span>` : ""}</span></label>`;
         }).join("");
         return `<div class="q" data-qid="${id}" data-kind="choice" data-answer="${it.answer}"><p class="prompt">${esc(it.q)}</p>${opts}<div class="row"><button class="check" type="button">批改</button></div><p class="feedback"></p></div>`;
       }
       if (it.kind === "ox") {
-        return `<div class="q" data-qid="${id}" data-kind="ox" data-answer="${it.answer ? "1" : "0"}" data-why="${esc(it.why || "")}"><p class="prompt"><span class="jp">${esc(it.q)}</span>${it.zh ? `<span class="ex-zh dlg-zh">${esc(it.zh)}</span>` : ""}</p><div class="row"><label><input type="radio" name="${id}" value="1"> ○ 對</label><label><input type="radio" name="${id}" value="0"> × 錯</label><button class="check" type="button">批改</button></div><p class="feedback"></p></div>`;
+        return `<div class="q" data-qid="${id}" data-kind="ox" data-answer="${it.answer ? "1" : "0"}" data-why="${esc(it.why || "")}"><p class="prompt"><span class="jp">${jpHtml(it.q)}</span>${it.zh ? `<span class="ex-zh dlg-zh">${esc(it.zh)}</span>` : ""}</p><div class="row"><label><input type="radio" name="${id}" value="1"> ○ 對</label><label><input type="radio" name="${id}" value="0"> × 錯</label><button class="check" type="button">批改</button></div><p class="feedback"></p></div>`;
       }
       const inc = it.includes ? ` data-includes="${esc(JSON.stringify(it.includes))}"` : "";
-      return `<div class="q" data-qid="${id}" data-kind="write" data-answers="${esc(JSON.stringify(it.answers))}"${inc}><p class="prompt"><span class="jp">${esc(it.q)}</span>${it.zh ? `<span class="ex-zh dlg-zh">${esc(it.zh)}</span>` : ""}${it.hint ? ` <span class="zh">（${esc(it.hint)}）</span>` : ""}</p><div class="row"><input class="ans" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="輸入日語">${it.speak ? `<button class="speak" type="button" data-say="${esc(it.speak)}" aria-label="播放題目">${SPEAKER}</button>` : ""}<button class="check" type="button">批改</button><button class="reveal" type="button">答案</button></div><p class="feedback"></p></div>`;
+      return `<div class="q" data-qid="${id}" data-kind="write" data-answers="${esc(JSON.stringify(it.answers))}"${inc}><p class="prompt"><span class="jp">${jpHtml(it.q)}</span>${it.zh ? `<span class="ex-zh dlg-zh">${esc(it.zh)}</span>` : ""}${it.hint ? ` <span class="zh">（${esc(it.hint)}）</span>` : ""}</p><div class="row"><input class="ans" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="輸入日語">${it.speak ? `<button class="speak" type="button" data-say="${esc(it.speak)}" aria-label="播放題目">${SPEAKER}</button>` : ""}<button class="check" type="button">批改</button><button class="reveal" type="button">答案</button></div><p class="feedback"></p></div>`;
     }).join("");
     return `<h3>${esc(part.title)}</h3>${part.lead ? `<p>${esc(part.lead)}</p>` : ""}${items}`;
   }).join("");
@@ -1071,13 +1418,13 @@ function renderMap() {
     <div class="table-wrap"><table class="plain">
       <thead><tr><th>課</th><th>要會用的句子</th><th>例</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td class="jp">N1 は N2 です／じゃありません／ですか。も。<div class="ex-zh">A 是 B。／不是。／是嗎。也。</div></td><td class="jp">わたしは学生です。<div class="ex-zh">我是學生。</div></td></tr>
-        <tr><td>2</td><td class="jp">これ／この。そうです／違います。だれの／何の。<div class="ex-zh">這／這個。是的／不是。誰的／什麼的。</div></td><td class="jp">この本はわたしのです。<div class="ex-zh">這本書是我的。</div></td></tr>
-        <tr><td>3</td><td class="jp">ここ／どこ／どちら。いくら。どこの。<div class="ex-zh">這裡／哪裡。多少錢。哪裡出產。</div></td><td class="jp">トイレはあそこです。<div class="ex-zh">廁所在那邊。</div></td></tr>
-        <tr><td>4</td><td class="jp">今何時。～時に。～から～まで。ます／ました。<div class="ex-zh">現在幾點。幾點做。從……到……。做／做了。</div></td><td class="jp">6時に起きます。<div class="ex-zh">六點起床。</div></td></tr>
+        <tr><td>1</td><td class="jp">${jpHtml("N1 は N2 です／じゃありません／ですか。も。")}<div class="ex-zh">A 是 B。／不是。／是嗎。也。</div></td><td class="jp">${jpHtml("わたしは学生です。")}<div class="ex-zh">我是學生。</div></td></tr>
+        <tr><td>2</td><td class="jp">${jpHtml("これ／この。そうです／違います。だれの／何の。")}<div class="ex-zh">這／這個。是的／不是。誰的／什麼的。</div></td><td class="jp">${jpHtml("この本はわたしのです。")}<div class="ex-zh">這本書是我的。</div></td></tr>
+        <tr><td>3</td><td class="jp">${jpHtml("ここ／どこ／どちら。いくら。どこの。")}<div class="ex-zh">這裡／哪裡。多少錢。哪裡出產。</div></td><td class="jp">${jpHtml("トイレはあそこです。")}<div class="ex-zh">廁所在那邊。</div></td></tr>
+        <tr><td>4</td><td class="jp">${jpHtml("今何時。～時に。～から～まで。ます／ました。")}<div class="ex-zh">現在幾點。幾點做。從……到……。做／做了。</div></td><td class="jp">${jpHtml("6時に起きます。")}<div class="ex-zh">六點起床。</div></td></tr>
       </tbody>
     </table></div>
-    <div class="note">自介可以先背這一段，再把名字和國家換成自己的。<div class="exline"><div class="ex-pair"><span class="ex jp">初めまして。ミラーです。アメリカから来ました。マカオ大学の学生です。どうぞよろしくお願いします。</span><span class="ex-zh">初次見面。我是米勒。我從美國來。我是澳門大學的學生。請多指教。</span></div><button class="speak" type="button" data-say="初めまして。ミラーです。アメリカから来ました。マカオ大学の学生です。どうぞよろしくお願いします。" aria-label="播放自介">${SPEAKER}</button></div></div>
+    <div class="note">自介可以先背這一段，再把名字和國家換成自己的。手機請關掉靜音開關，才聽得到日語語音。<div class="exline"><div class="ex-pair"><span class="ex jp">${jpHtml("初めまして。ミラーです。アメリカから来ました。マカオ大学の学生です。どうぞよろしくお願いします。")}</span><span class="ex-zh">初次見面。我是米勒。我從美國來。我是澳門大學的學生。請多指教。</span></div><button class="speak" type="button" data-say="初めまして。ミラーです。アメリカから来ました。マカオ大学の学生です。どうぞよろしくお願いします。" aria-label="播放自介">${SPEAKER}</button></div></div>
     <h3 id="traps">十個最容易扣分的地方</h3>
     <ol>
       <li>助詞「は」讀 wa。「も」取代「は」，不說「はも」。</li>
